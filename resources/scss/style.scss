@@ -1,0 +1,816 @@
+@import "base/_destyle.scss";
+
+/*
+------------------------------
+設定
+------------------------------
+*/
+$breakpoints: (
+  'sm': 'screen and (min-width: 400px)',
+  'md': 'screen and (min-width: 768px)',
+  'lg': 'screen and (min-width: 1000px)',
+  'xl': 'screen and (min-width: 1200px)',
+) !default;
+
+@mixin mq($breakpoint: md) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+/*
+------------------------------
+色
+------------------------------
+*/
+$text-color: #14171a;
+$text-color2: #fff;
+// $text-color3: #333333;
+$link-color: #1a73e8;
+$text-color3: darkgray;
+$text-subcolor: lightgrey;
+$bg-color: lightgrey;
+$bg-color2: whitesmoke;
+
+/*
+------------------------------
+共通
+------------------------------
+*/
+body {
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    margin-bottom: 20px;
+}
+
+p, li {
+    font-size: 14px;
+    @include mq() {
+        font-size: 16px;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: $text-color;
+}
+
+.sec-content {
+    padding: 60px 0;
+}
+
+/*
+------------------------------
+ユーティリティー
+------------------------------
+*/
+
+.ta-c {
+    text-align: center;
+}
+
+.shadow-txt {
+    text-shadow: 0 7px 3px rgb(0 0 0 / 50%);
+}
+
+.shadow-box {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.hov {
+    transition: all ease .3s;
+    &.hov-txt:hover {
+        text-shadow: none;
+    }
+    &.hov-box:hover {
+        box-shadow: none;
+    }
+}
+
+.glass {
+    background: rgba( 255, 255, 255, .1 );
+    backdrop-filter: blur( 2px );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    -webkit-backdrop-filter: blur( 2px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.scroll {
+    &::-webkit-scrollbar {
+        position: relative;
+        width: 5px;
+        height: 5px;
+        background-clip: content-box;
+    }
+    &::-webkit-scrollbar-track {
+    }
+    &::-webkit-scrollbar-thumb {
+        width: 5px;
+        height: 5px;
+        border-radius: 20px;
+        background: $bg-color;
+    }
+}
+
+.opacity-1 {
+    opacity: 1 !important;
+}
+
+.modal {
+    position: relative;
+    z-index: -1;
+    opacity: 0;
+    backdrop-filter: blur( 1px );
+    transition: backdrop-filter ease .5s;
+    background: rgba( 255, 255, 255, .1 );
+    @include mq() {
+        top: -60px;
+    }
+    &.active {
+        backdrop-filter: blur( 10px );
+        opacity: 1;
+        z-index: 4;
+        width: 100vw;
+        height: 100vh;
+    }
+}
+
+@keyframes spin{
+    from{
+        transform: none;
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+#loading {
+    width: 100vw;
+    height: 100vh;
+    transition: all 1s;
+    background-color: $text-color2;
+
+  /* 以下のコードを追加 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    .spinner{
+        position: fixed;
+        width: 70px;
+        height: 70px;
+        top:calc(50% - 70px/2);
+        left:calc(50% - 70px/2);
+        transform: translate(-50%, -50%);
+        border: 5px solid $text-color;
+        border-left-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.5s linear infinite;
+    }
+  }
+
+  .loaded {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  #body.works-detail {
+    #loading {
+        display: none;
+    }
+  }
+
+/*
+------------------------------
+パンくず
+------------------------------
+*/
+.breadcrumb {
+    margin-bottom: 20px;
+    a, span {
+        font-size: .8rem;
+    }
+    li {
+        display: inline;
+    }
+    a {
+        color: $text-color3;
+        font-weight: bold;
+    }
+    i {
+        color: $text-color;
+        font-size: .7rem;
+        padding: 0 0.2em;
+    }
+}
+.works, .blogs {
+    .breadcrumb {
+        margin-bottom: 0;
+        margin-left: 20px;
+    }
+}
+
+
+/*
+------------------------------
+見出し
+------------------------------
+*/
+.top-title_sub {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 40px;
+    @include mq() {
+        margin-bottom: 60px;
+    }
+    span {
+        font-size: 2em;
+    }
+}
+
+/*
+------------------------------
+ヘッダー
+------------------------------
+*/
+header {
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    @include mq() {
+        top: 0;
+        bottom: auto;
+    }
+    #app, .header-inner {
+        height: 100%;
+    }
+    .g-nav {
+        margin: 5px auto;
+        font-size: 1.2em;
+        font-weight: bold;
+        @include mq() {
+            margin: 20px auto;
+            width: 800px;
+        }
+        ul {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-inline-start: 0 !important;
+        }
+        li {
+            list-style: none;
+        }
+        .prof-ico {
+            cursor: pointer;
+            @include mq() {
+                position: absolute;
+                right: 30px;
+            }
+            img {
+                width: 35px;
+                height: 35px;
+                transition: transform .3s ease;
+                @include mq() {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+            &:hover img {
+                transform: rotate(-15deg);
+            }
+        }
+    }
+}
+
+/*
+------------------------------
+スライダー
+------------------------------
+*/
+.swiper {
+    width: 100%;
+}
+.swiper-button-prev, .swiper-button-next {
+    display: none;
+    @include mq() {
+        display: inline-block;
+        color: $text-color;
+        transform: scale(.5);
+    }
+}
+
+
+/*
+------------------------------
+プロフモーダル
+------------------------------
+*/
+.prof-modal {
+    .post-conts {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    .posts-conts--inner {
+        height: 80vh;
+        max-width: 1200px;
+        min-height: 500px;
+        max-height: 700px;
+        overflow-y: scroll;
+        backdrop-filter: none;
+        transition: opacity .2s .5s ease, background .5s 1.5s ease, backdrop-filter .3s .7s ease;
+        z-index: 5;
+        display: none;
+        &.opacity-1 {
+            background: rgba(255, 255, 255, .4) !important;
+            backdrop-filter: blur(5px);
+        }
+        .posts-cont {
+            transition: opacity .5s 1.5s ease;
+        }
+    }
+
+    @keyframes glass-animation {
+        from{
+            box-shadow: 0 5px 22px 0 rgba( 31, 38, 135, 0.37 );
+        }
+        to{
+            box-shadow:0 5px 22px 10px rgba(16, 19, 67, 0.7);
+        }
+    }
+
+    @keyframes glass-animation--sp {
+        from{
+            box-shadow: 0 5px 26px 0 rgba( 31, 38, 135, 0.37 );
+        }
+        to{
+            box-shadow:0 5px 26px 10px rgba(16, 19, 67, 0.7);
+        }
+    }
+
+    &.active {
+        .posts-conts--inner {
+            display: block;
+        }
+        .glass {
+            animation: glass-animation--sp .4s ease forwards;
+            @include mq() {
+                animation: glass-animation .4s ease forwards;
+            }
+        }
+    }
+    .posts-cont {
+        z-index: 2;
+    }
+    .prof-header {
+        @include mq() {
+            margin-bottom: 50px;
+        }
+        &--inner {
+            @include mq() {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+        }
+    }
+    .prof-icon {
+        margin-bottom: 20px;
+        @include mq() {
+            margin-bottom: 0;
+            width: 20%;
+        }
+        img {
+            width: 150px;
+            height: 150px;
+            display: block;
+            margin: 0 auto 20px;
+        }
+        p {
+            font-weight: bold;
+        }
+    }
+    .prof-skils {
+        line-height: 1.7;
+        margin-bottom: 20px;
+        @include mq() {
+            margin-bottom: 0;
+            width: 30%;
+        }
+        dl {
+            margin-bottom: 10px;
+        }
+        dt {
+            font-weight: bold;
+           i {
+               margin-right: 5px;
+           }
+        }
+        dd {
+            margin-left: 21px;
+        }
+    }
+    .prof-github {
+        margin-bottom: 20px;
+        @include mq() {
+            margin-bottom: 0;
+            width: 40%;
+        }
+        img {
+            width: 100%;
+            &:first-child {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+/*
+------------------------------
+トップ
+------------------------------
+*/
+.home, .works, .blogs {
+
+    .sec-content {
+        padding: 50px 0;
+        @include mq() {
+            padding: 100px 0;
+        }
+    }
+
+    .posts-btn {
+        margin-bottom: 20px;
+        &:nth-of-type(2) {
+            font-size: 2rem;
+        }
+    }
+    .top-items {
+        max-height: 390px !important;
+    }
+    .items {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        align-items: center;
+        max-height: 100%;
+        display: flex;
+        @include mq() {
+            height: auto;
+            align-items: unset;
+        }
+        .item {
+            border-radius: 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            width: 350px;
+            height: 100% !important;
+            @include mq() {
+                display: block;
+                // min-width: 30%;
+                width: 30% !important;
+                height: auto !important;
+                margin: 30px 1.6%;
+            }
+            .item-img {
+                text-align: center;
+                position: relative;
+                width: 110px;
+                height: 110px;
+                overflow: hidden;
+                @include mq() {
+                    width: auto;
+                    height: 200px;
+                }
+                img {
+                    width: 110px;
+                    height: 110px;
+                    object-fit: cover;
+                    @include mq() {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 110%;
+                        height: auto;
+                        object-fit: unset;
+                    }
+                }
+            }
+            .item-txt {
+                padding: 10px;
+                @include mq() {
+                    padding: 20px;
+                }
+            }
+            .item-ttl {
+                margin: 0 auto 5px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color: $text-color;
+                @include mq() {
+                    text-align: center;
+                }
+            }
+            .item-body {
+                margin: 0;
+                text-align: left;
+                color: $text-subcolor;
+                font-size: .8rem;
+            }
+        }
+        .tag {
+            text-align: center;
+            font-size: .8rem;
+            padding-bottom: 10px;
+            color: $text-color2;
+            @include mq() {
+                padding-bottom: 15px;
+            }
+            span {
+                padding: 1px 8px;
+                border-radius: 10px;
+                background: $bg-color;
+            }
+        }
+    }
+}
+
+/*
+------------------------------
+投稿共通
+------------------------------
+*/
+.sec-message {
+    text-align: center;
+    color: $text-color3;
+    margin-bottom: 30px;
+}
+
+.sidebar-posts {
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    background: $bg-color;
+    color: $text-color;
+    padding: 15px 30px;
+    .posts-menus {
+        a {
+            display: block;
+            color: $text-color;
+            border-bottom: 1px solid $text-color2;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+    }
+    footer {
+        position: absolute;
+        left: 20px;
+        bottom: 100px;
+    }
+}
+
+/*
+------------------------------
+投稿関連
+------------------------------
+*/
+.sec-posts {
+    background-size: cover !important;
+    background-attachment: fixed;
+    padding: 0;
+    &.sec-admin {
+        margin-left: 200px;
+        h2 {
+            text-align: left;
+        }
+    }
+    .posts-conts {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0 auto;
+        position: relative;
+        &--inner {
+            width: 80%;
+            min-height: 80%;
+            font-size: .8rem;
+            margin: 15px auto 0;
+            padding: 20px;
+            box-sizing: border-box;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 5px;
+            @include mq() {
+                font-size: 1rem;
+                width: 80%;
+                top: 50%;
+            }
+        }
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    .text-danger {
+        color: $text-color;
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: bold
+    }
+    .posts-img {
+        text-align: center;
+        margin: 40px auto 40px;
+        img {
+            display: inline-block;
+            object-fit: cover;
+            width: 300px;
+            height: 170px;
+            @include mq() {
+                width: 700px;
+                height: 400px;
+            }
+        }
+    }
+    .posts-txt {
+        color: #000;
+        line-height: 1.8;
+        @include mq() {
+            padding: 40px;
+        }
+    }
+    .posts-btn {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    .dates {
+        color: $text-subcolor;
+        font-size: .7em;
+        text-align: right;
+
+    }
+    .posts-table {
+
+        th {
+            padding: 10px;
+        }
+        td {
+            padding-left: 10px;
+        }
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    input, textarea {
+        background: $bg-color2;
+    }
+    input[type="text"], textarea {
+        width: 97%;
+        padding: 15px;
+    }
+    textarea {
+        height: 40vh;
+    }
+    select {
+        border: 1px solid $text-color;
+        border-radius: 5px;
+        width: 50px;
+        text-align: center;
+        line-height: 20px;
+    }
+    .mt-5 {
+        width: 200px;
+        margin: 0 auto;
+    }
+    .btn-secondary {
+        border: 1px solid $text-subcolor;
+        border-radius: 2%;
+        margin-right: 20px;
+    }
+}
+
+/*
+------------------------------
+フッター
+------------------------------
+*/
+footer {
+    text-align: center;
+    margin-bottom: 100px;
+    @include mq() {
+        margin-bottom: 0;
+    }
+}
+
+
+/*
+------------------------------
+実績一覧
+------------------------------
+*/
+.works, .blogs {
+    .items {
+        flex-wrap: wrap;
+        justify-content: center;
+        @include mq() {
+            justify-content: flex-start;
+        }
+    }
+    .top-title_sub {
+        margin-bottom: 20px;
+    }
+}
+
+/*
+------------------------------
+ブログ一覧
+------------------------------
+*/
+.blogs {
+    .items {
+        flex-wrap: wrap;
+    }
+}
+
+
+/*
+------------------------------
+実績詳細
+------------------------------
+*/
+.works-detail {
+    header, .posts-conts--inner {
+        opacity: 0;
+        transition: opacity .3s .5s ease, background .5s 1.5s ease;
+        &.opacity-1 {
+            background: rgba(255, 255, 255, .4) !important;
+            backdrop-filter: blur(5px);
+        }
+    }
+
+    .header-inner {
+        background: transparent !important;
+        backdrop-filter: blur(0px);
+    }
+
+    .posts-conts--inner {
+        height: 80vh;
+        max-width: 1200px;
+        min-height: 500px;
+        max-height: 700px;
+        overflow-y: scroll;
+        backdrop-filter: none;
+        transition: opacity .2s .5s ease, background .5s 1.5s ease, backdrop-filter .3s .7s ease;
+        .posts-cont {
+            opacity: 0;
+            transition: opacity .5s 1.5s ease;
+        }
+    }
+
+    .active .posts-conts--inner {
+        margin-top: 0;
+        top: 50%;
+    }
+
+    .posts-btn {
+        margin-bottom: 20px;
+        &:nth-of-type(2) {
+            font-size: 2rem;
+        }
+    }
+}
+
+/*
+------------------------------
+ブログ詳細
+------------------------------
+*/
+.blogs-detail {
+    .posts-conts {
+        margin: 40px auto 100px;
+        width: 90vw;
+        padding: 30px;
+        @include mq() {
+            width: 1000px;
+            margin: 100px auto;
+        }
+        h2 {
+            margin: 0;
+            margin-bottom: 30px;
+
+        }
+    }
+}
