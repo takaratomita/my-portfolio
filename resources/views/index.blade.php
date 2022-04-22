@@ -1,3 +1,5 @@
+{{-- {{dd(print_r(mb_get_info("all")));}} --}}
+
 <x-layout>
     <x-slot name="title">
         たからのポートフォリオサイト | 携わった作品とブログを公開しています
@@ -23,7 +25,7 @@
                             @if ( isset($work->img) && $work->img !== '' )
                             <img loading="lazy" src="data:image/webp;base64, {{ e($work->img) }}" alt="">
                             @else
-                            <img src="{{ url('images/common/noimage.png') }}" alt="">
+                            <img src="{{ url('images/common/noimage.webp') }}" alt="">
                             @endif
                         </div>
                     </a>
@@ -35,7 +37,7 @@
                             <p class="tag"><span>{{ e($work_tags->{$work->category}) }}</span></p>
                         </a>
                         <a href="works/{{ e($work->id) }}">
-                            <p class="item-body">{{mb_strimwidth( e($work->content), 0, 60, "...", "UTF-8" ); }}</p>
+                            <p class="item-body">{{mb_strimwidth( e($work->content), 0, 100, "...", "UTF-8" ); }}</p>
                         </a>
                     </div>
                 </div>
@@ -44,13 +46,12 @@
                 <div class="item top-item work-item shadow-box hov hov-box">
                     <a href="#">
                         <div class="item-img">
-                            <img src="{{ url('images/common/noimage.png') }}" alt="">
+                            <img src="{{ url('images/common/noimage.webp') }}" alt="">
                         </div>
                     </a>
                     <a href="#">
                         <div class="item-txt">
                             <h3 class="item-ttl">データがありません</h3>
-
                         </div>
                     </a>
                 </div>
@@ -79,7 +80,7 @@
                                 @if ( isset($blog->img) && $blog->img !== '' )
                                 <img loading="lazy" src="data:image/webp;base64, {{ e($blog->img) }}" alt="">
                                 @else
-                                <img src="{{ url('images/common/noimage.png') }}" alt="">
+                                <img src="{{ url('images/common/noimage.webp') }}" alt="">
                                 @endif
                             </div>
                         </a>
@@ -87,7 +88,7 @@
                             <div class="item-txt">
                                 <h3 class="item-ttl">{{ e($blog->title)  }}</h3>
                                 <p class="item-body">{{
-                                mb_strimwidth( e($blog->content), 0, 60, "...", "UTF-8" );
+                                mb_strimwidth( e($blog->content), 0, 100, "...", "UTF-8" );
                                 }}</p>
                             </div>
                         </a>
@@ -96,7 +97,7 @@
                 <div class="item top-item work-item shadow-box hov hov-box">
                     <a href="#">
                         <div class="item-img">
-                            <img src="{{ url('images/common/noimage.png') }}" alt="">
+                            <img src="{{ url('images/common/noimage.webp') }}" alt="">
                         </div>
                     </a>
                     <a href="#">
@@ -109,6 +110,10 @@
                 @endforelse
 
             </div>
+            @if( count($blogs) > 3 )
+            <!-- スクロールバー -->
+            <div class="swiper-scrollbar"></div>
+            @endif
         </div>
 
     </section>

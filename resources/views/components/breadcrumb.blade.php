@@ -3,7 +3,7 @@
         @if ( trim($body_class) === 'works' || trim($body_class) === 'works-detail' )
         <li itemprop="itemListElement" itemscope
             itemtype="https://schema.org/ListItem">
-        <a itemprop="item" href="/">
+        <a class="shadow-txt hov hov-txt" itemprop="item" href="/">
             <span itemprop="name">Home</span>
         </a>
         <i class="fa-solid fa-angle-right"></i>
@@ -12,7 +12,7 @@
         <li itemprop="itemListElement" itemscope
         itemtype="https://schema.org/ListItem">
         @if ( isset($breadcrumb) )
-        <a itemprop="item" href="/works/">
+        <a class="shadow-txt hov hov-txt" itemprop="item" href="/works/">
             <span itemprop="name">Works</span>
         </a>
         <i class='fa-solid fa-angle-right'></i>
@@ -32,7 +32,7 @@
         @elseif ( trim($body_class) === 'blogs' || trim($body_class) === 'blogs-detail' )
         <li itemprop="itemListElement" itemscope
             itemtype="https://schema.org/ListItem">
-        <a itemprop="item" href="/">
+        <a class="shadow-txt hov hov-txt" itemprop="item" href="/">
             <span itemprop="name">Home</span>
         </a>
         <i class="fa-solid fa-angle-right"></i>
@@ -41,7 +41,7 @@
         <li itemprop="itemListElement" itemscope
         itemtype="https://schema.org/ListItem">
         @if ( isset($breadcrumb) )
-        <a itemprop="item" href="/blogs/">
+        <a class="shadow-txt hov hov-txt" itemprop="item" href="/blogs/">
             <span itemprop="name">Blogs</span>
         </a>
         <i class='fa-solid fa-angle-right'></i>

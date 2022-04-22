@@ -38,7 +38,7 @@
                             @if  ( isset($blog->img) && $blog->img !== '' )
                             <img width="30" height="30" src="data:image/webp;base64, {{ $blog->img  }}" alt="">
                             @else
-                            <img width="30" height="30" src="{{ url('images/common/noimage.png') }}" alt="">
+                            <img width="30" height="30" src="{{ url('images/common/noimage.webp') }}" alt="">
                             @endif
                         </td>
                         <td>{{ $blog->updated_at  }}</td>

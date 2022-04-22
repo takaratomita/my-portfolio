@@ -1,4 +1,5 @@
 @import "base/_destyle.scss";
+@import "base/_tailwind.scss";
 
 /*
 ------------------------------
@@ -196,7 +197,6 @@ a {
         display: inline;
     }
     a {
-        color: $text-color3;
         font-weight: bold;
     }
     i {
@@ -440,6 +440,8 @@ header {
         padding: 50px 0;
         @include mq() {
             padding: 100px 0;
+            max-width: 1500px;
+            margin: 0 auto;
         }
     }
 
@@ -539,6 +541,13 @@ header {
                 background: $bg-color;
             }
         }
+    }
+}
+
+.top-blog {
+    flex-direction: column;
+    @include mq() {
+        flex-direction: row;
     }
 }
 

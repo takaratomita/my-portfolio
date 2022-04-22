@@ -29,14 +29,14 @@
                                 @if ($blog->img)
                                 <img loading="lazy" src="data:image/webp;base64, {{ e($blog->img) }}" alt="">
                                 @else
-                                <img src="{{ e(url('images/common/noimage.png')) }}" alt="">
+                                <img src="{{ e(url('images/common/noimage.webp')) }}" alt="">
                                 @endif
                             </div>
                         </a>
                         <a href="/blogs/{{ e($blog->id) }}">
                             <div class="item-txt">
                                 <h3 class="item-ttl">{{ e($blog['title']) }}</h3>
-                                <p class="item-body">{{mb_strimwidth( e($blog->content), 0, 60, "...", "UTF-8" ); }}</p>
+                                <p class="item-body">{{mb_strimwidth( e($blog->content), 0, 100, "...", "UTF-8" ); }}</p>
                             </div>
                         </a>
                     </div>
@@ -44,7 +44,7 @@
                     <div class="item blog-item shadow-box hov hov-box">
                         <a href="#">
                             <div class="item-img">
-                                <img src="{{ url('images/common/noimage.png') }}" alt="">
+                                <img src="{{ url('images/common/noimage.webp') }}" alt="">
                             </div>
                         </a>
                         <a href="#">

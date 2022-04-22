@@ -17,7 +17,7 @@ class BlogController extends Controller
      */
     public function showTop()
     {
-        $blogs = Blog::all()->sortBy('id');
+        $blogs = Blog::all()->sortByDesc('id');
         $works = work::all()->sortBy('id');
         $work_tags = (object) [
             'personal' => '個人で作ったもの',
@@ -34,7 +34,7 @@ class BlogController extends Controller
      */
     public function showList()
     {
-        $blogs = Blog::all()->sortBy('id');
+        $blogs = Blog::all()->sortByDesc('id');
 
         return view('blogs.index', ['blogs' => $blogs]);
     }
@@ -45,7 +45,7 @@ class BlogController extends Controller
      */
     public function showListAdmin()
     {
-        $blogs = Blog::all()->sortBy('id');
+        $blogs = Blog::all()->sortByDesc('id');
 
         return view('admin.blog.list', ['blogs' => $blogs]);
     }

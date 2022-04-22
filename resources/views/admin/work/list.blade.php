@@ -38,7 +38,7 @@
                             @if ( isset($work->img) && $work->img !== '' )
                             <img width="30" height="30" src="data:image/webp;base64, {{ e($work->img)  }}" alt="">
                             @else
-                            <img width="30" height="30" src="{{ url('images/common/noimage.png') }}" alt="">
+                            <img width="30" height="30" src="{{ url('images/common/noimage.webp') }}" alt="">
                             @endif
                         </td>
                         <td>{{ e($work->updated_at)  }}</td>
