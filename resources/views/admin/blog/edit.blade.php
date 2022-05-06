@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        管理画面 | たからのポートフォリオサイト
+        管理画面 - たからのポートフォリオサイト
     </x-slot>
     <x-slot name="sub_title">
         blog

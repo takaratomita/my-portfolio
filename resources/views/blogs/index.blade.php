@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        Blog | たからのポートフォリオサイト
+        Blog - たからのポートフォリオサイト
     </x-slot>
     <x-slot name="admin">
         false

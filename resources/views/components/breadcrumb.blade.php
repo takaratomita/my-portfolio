@@ -12,7 +12,7 @@
         <li itemprop="itemListElement" itemscope
         itemtype="https://schema.org/ListItem">
         @if ( isset($breadcrumb) )
-        <a class="shadow-txt hov hov-txt" itemprop="item" href="/works/">
+        <a class="shadow-txt hov hov-txt" itemprop="item" href="{{ route('work') }}">
             <span itemprop="name">Works</span>
         </a>
         <i class='fa-solid fa-angle-right'></i>
@@ -41,7 +41,7 @@
         <li itemprop="itemListElement" itemscope
         itemtype="https://schema.org/ListItem">
         @if ( isset($breadcrumb) )
-        <a class="shadow-txt hov hov-txt" itemprop="item" href="/blogs/">
+        <a class="shadow-txt hov hov-txt" itemprop="item" href="{{ route('blog') }}">
             <span itemprop="name">Blogs</span>
         </a>
         <i class='fa-solid fa-angle-right'></i>

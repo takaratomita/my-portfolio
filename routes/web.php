@@ -26,6 +26,9 @@ Route::get('/works/',  [WorkController::class, 'showList'])->name('work');
 Route::get('/admin/blog/', [BlogController::class, 'showListAdmin'])->name('blogs');
 Route::get('/admin/work/', [WorkController::class, 'showListAdmin'])->name('works');
 
+// ログイン画面を表示
+Route::get('/admin/', [BlogController::class, 'showLogin'])->name('admin');
+
 // 登録画面を表示
 Route::get('/admin/blog/create', [BlogController::class, 'showCreate'])->name('blogCreate');
 Route::get('/admin/work/create', [WorkController::class, 'showCreate'])->name('workCreate');

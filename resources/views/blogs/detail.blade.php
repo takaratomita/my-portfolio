@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        {{ e($blog->title) }} | たからのポートフォリオサイト
+        {{ e($blog->title) }} - たからのポートフォリオサイト
     </x-slot>
     <x-slot name="sub_title">
         blog
@@ -30,6 +30,14 @@
                     <img src="data:image/webp;base64, {{ e($blog->img) }}" alt="">
                 </div>
                 <p class="posts-txt">{!! nl2br(e($blog->content)) !!}</p>
+                @component('components.navigation')
+                @slot('id')
+                {{ e($blog->id) }}
+                @endslot
+                @slot('last_id')
+                {{ e($last_id) }}
+                @endslot
+                @endcomponent
                 <div class="dates">
                     <span>作成日：{{ e($blog->created_at) }}</span><br>
                     <span>更新日：{{ e($blog->updated_at) }}</span>

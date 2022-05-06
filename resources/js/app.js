@@ -1,59 +1,76 @@
 
     const body = document.getElementById('body');
 
-    window.addEventListener('DOMContentLoaded', () => {
-        const anchorLinks = document.querySelectorAll('a[href^="#"]');
-        const anchorLinksArr = Array.prototype.slice.call(anchorLinks);
+    // リサイズ時、リロード
+    window.addEventListener('resize', e => {
+        if (e.target.innerWidth <= 768) {
+            location.reload();
+        }
+    });
 
-        // スクロールアニメーション
-        anchorLinksArr.forEach(link => {
-          link.addEventListener('click', e => {
-            e.preventDefault();
-            const targetId = link.hash;
-            const targetElement = document.querySelector(targetId);
-            const targetOffsetTop = window.pageYOffset + targetElement.getBoundingClientRect().top;
-            window.scrollTo({
-              top: targetOffsetTop,
-              behavior: "smooth"
+    if ( body.classList.contains('works') ) {
+        window.addEventListener('DOMContentLoaded', () => {
+            const anchorLinks = document.querySelectorAll('a[href*="#"]');
+            const anchorLinksArr = Array.prototype.slice.call(anchorLinks);
+
+            // スクロールアニメーション
+            anchorLinksArr.forEach(link => {
+              link.addEventListener('click', e => {
+                e.preventDefault();
+                const targetId = link.hash;
+                const targetElement = document.querySelector(targetId);
+                const targetOffsetTop = window.pageYOffset + targetElement.getBoundingClientRect().top;
+                window.scrollTo({
+                  top: targetOffsetTop,
+                  behavior: "smooth"
+                });
+              });
             });
           });
-        });
-      });
+    }
 
       if ( body.classList.contains('works-detail') ) {
-          const opacityList = ['header', 'posts-conts--inner', 'posts-cont'];
+          const opacityList = ['header', 'posts-conts--inner', 'posts-cont', 'navigation', 'links'];
           opacityList.forEach( e => {
             document.getElementById(e).classList.add('opacity-1');
           });
       }
 
       if ( body.classList.contains('home') ) {
+            //swiper 768以下で起動
+            const mediaQueryList = window.matchMedia("(max-width:767px)");
+            let swiper;
 
-        // swipper
-        let swiper = new Swiper(".swiper", {
-            direction: 'vertical',
-            slidesPerView: 3,
-            // slidesPerView: 1,
-            mousewheel: {
-                invert: false,
-            },
-            scrollbar: {
-                el: '.swiper-scrollbar',
-                draggable: true,
-                hide: true
-            },
-            breakpoints: {
-                // 768px以上の場合
-                768: {
-                    direction: 'horizontal',
-                },
-                autoplay: {
-                    delay: 3000,
-                },
-            },
+            const listener = (event) => {
+            if (!event.matches) {
+                        swiper = new Swiper('.swiper', {
+                            slidesPerView: 3,
+                            loop: true,
+                            speed: 500,
+                            autoplay: {
+                                delay: 4000,
+                                disableOnInteraction: false
+                            },
+                            mousewheel: {
+                                invert: false,
+                            },
+                            scrollbar: {
+                                el: '.swiper-scrollbar',
+                                draggable: true,
+                                hide: true
+                            },
+                        });
+                    }
+                }
+                mediaQueryList.addEventListener("change", listener);
+                listener(mediaQueryList);
+            }
 
-        });
-      }
+    // AOS
+    // スマホとタブレット時は無効
+    AOS.init({
+        disable: 'mobile'
+    });
 
 
 /**

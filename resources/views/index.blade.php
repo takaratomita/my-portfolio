@@ -2,7 +2,7 @@
 
 <x-layout>
     <x-slot name="title">
-        たからのポートフォリオサイト | 携わった作品とブログを公開しています
+        たからのポートフォリオサイト - 携わった作品とブログを公開しています
     </x-slot>
     <x-slot name="admin">
         false
@@ -13,7 +13,7 @@
 
     <section class="sec-content" id="top-works">
 
-        <h2 class="top-title_sub shadow-txt"><a href="/works/" class="hov hov-txt"><span>W</span>orks</a></h2>
+        <h2 class="top-title_sub shadow-txt"><a href="works" class="hov hov-txt"><span>W</span>orks</a></h2>
 
         <div class="post-conts <?= count($works) > 3 ? "swiper" : ""; ?>">
         <div id="top-works" class="items top-items top-works swiper-wrapper">
@@ -33,11 +33,11 @@
                         <a href="works/{{ e($work->id) }}">
                             <h3 class="item-ttl">{{ e($work['title']) }}</h3>
                         </a>
-                        <a href="works/#{{ e($work->category) }}">
+                        <a href="works#{{ e($work->category) }}">
                             <p class="tag"><span>{{ e($work_tags->{$work->category}) }}</span></p>
                         </a>
                         <a href="works/{{ e($work->id) }}">
-                            <p class="item-body">{{mb_strimwidth( e($work->content), 0, 100, "...", "UTF-8" ); }}</p>
+                            <p class="item-body">{{mb_strimwidth( e($work->content), 0, 90, "...", "UTF-8" ); }}</p>
                         </a>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
 
     <section class="sec-content" id="top-blog">
 
-        <h2 class="top-title_sub shadow-txt"><a href="/blogs/" class="hov hov-txt"><span>B</span>log</a></h2>
+        <h2 class="top-title_sub shadow-txt"><a href="blogs" class="hov hov-txt"><span>B</span>log</a></h2>
 
         <div class="post-conts <?= count($blogs) > 3 ? "swiper" : ""; ?>">
             <div id="top-blogs" class="items top-items top-blog scroll swiper-wrapper">
@@ -88,7 +88,7 @@
                             <div class="item-txt">
                                 <h3 class="item-ttl">{{ e($blog->title)  }}</h3>
                                 <p class="item-body">{{
-                                mb_strimwidth( e($blog->content), 0, 100, "...", "UTF-8" );
+                                mb_strimwidth( e($blog->content), 0, 90, "...", "UTF-8" );
                                 }}</p>
                             </div>
                         </a>

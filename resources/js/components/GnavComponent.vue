@@ -2,15 +2,7 @@
 <div>
 
     <div :class="{'header-inner': true, glass: !active}">
-        <nav class="g-nav">
-                <ul>
-                    <li class="shadow-txt hov hov-txt"><a href="/">Home</a></li>
-                    <li class="shadow-txt hov hov-txt"><a href="/works/">Works</a></li>
-                    <li class="shadow-txt hov hov-txt"><a href="/blogs/">Blog</a></li>
-                    <li class="prof-ico shadow-txt" @click="active = !active"><img src="/images/common/prof_02.webp" alt=""></li>
 
-                </ul>
-        </nav>
         <div :class="{'prof-modal': true, modal: true, glass: true, 'sec-posts': true, active: active}" @click="active = !active">
             <div id="posts-conts--inner" class="posts-conts--inner shadow-box glass scroll opacity-1" @click.stop="active = active">
             <div id="posts-cont" class="posts-cont opacity-1">
@@ -56,6 +48,39 @@
             </div>
         </div>
         </div>
+                <nav class="g-nav">
+                <ul>
+                    <li><a class="shadow-txt hov hov-txt" href="/" @mouseover="hovFlug = false" >Home</a></li>
+                    <li><a class="shadow-txt hov hov-txt" href="/works/"
+                    @mouseover="hovFlug = true"
+                    >Works</a>
+                    <ul :class="{'works-modal':true,
+                    active: hovFlug, 'shadow-box':true,}"
+                     @mouseover="hovFlug = true" @mouseleave="hovFlug = false">
+                        <li @click="hovFlug = false"><a href="/works/#personal">
+                            <span class="">個人で作ったもの</span>
+                            <div class="cover"></div>
+                            <img src="/images/common/top-work_01.webp" alt="">
+                            </a>
+                        </li>
+                        <li @click="hovFlug = false"><a href="/works/#company">
+                            <span class="">会社で作ったもの</span>
+                            <div class="cover"></div>
+                            <img src="/images/common/top-work_02.webp" alt="">
+                            </a>
+                        </li>
+                        <li @click="hovFlug = false"><a href="/works/#friend">
+                            <span class="">友達と作ったもの</span>
+                            <div class="cover"></div>
+                            <img src="/images/common/top-work_03.webp" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                    </li>
+                    <li><a class="shadow-txt hov hov-txt" href="/blogs/" @mouseover="hovFlug = false">Blog</a></li>
+                    <li class="prof-ico shadow-txt" @click="active = !active"><img src="/images/common/prof_02.webp" alt=""></li>
+                </ul>
+        </nav>
     </div>
 </div>
 </template>
@@ -65,6 +90,8 @@
         data() {
             return {
                 active: false,
+                hovFlug: false,
+                aos: 'fade-up',
             }
         }
     }

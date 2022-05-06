@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        {{ $work->title }} | たからのポートフォリオサイト
+        {{ $work->title }} - たからのポートフォリオサイト
     </x-slot>
     <x-slot name="sub_title">
         work
@@ -16,7 +16,7 @@
     </x-slot>
     <section id="sec-posts" class="sec-content sec-posts">
         <div id="posts-conts" class="posts-conts">
-            <div id="posts-conts--inner" class="posts-conts--inner shadow-box col-md-8 col-md-offset-2 glass scroll">
+            <div id="posts-conts--inner" class="posts-conts--inner shadow-box col-md-8 col-md-offset-2 glass">
                 @component('components.breadcrumb')
                 @slot('body_class')
                 works-detail
@@ -27,15 +27,31 @@
                 @endcomponent
                 <div id="posts-cont" class="posts-cont">
                     <h2>{{ e($work->title) }}</h2>
-                    <p class="posts-txt">{!! nl2br(e($work->content)) !!}</p>
-                    @if ( isset($work->url) )
-                    <div class="posts-btn ta-c"><a class="shadow-txt hov hov-txt " target="_blank" href="{{ e($work->url) }}">Visit</a></div>
-                    @endif
-                    @if ( isset($work->git_url) )
-                    <div class="posts-btn ta-c"><a class="shadow-txt hov hov-txt " target="_blank" href="{{ e($work->git_url) }}"><i class="fa-brands fa-github"></i></a></div>
-                    @endif
+                    <p class="posts-txt scroll">{!!
+                    preg_replace('/(挑戦したこと：[\w|\s|\S]+?\n|業務内容：[\w|\s|\S]+?\n)/u','<strong>${1}</strong>', nl2br(e($work->content)))
+                    !!}</p>
+
                 </div>
             </div>
+            @component('components.navigation')
+            @slot('id')
+            {{ e($work->id) }}
+            @endslot
+            @slot('last_id')
+            {{ e($last_id) }}
+            @endslot
+            @endcomponent
+
+            @if( isset($work->url) || isset($work->git_url) )
+            <div class="links" id="links">
+                @if ( isset($work->url) )
+                <div class="posts-btn ta-c"><a class="shadow-txt hov hov-txt " target="_blank" href="{{ e($work->url) }}">Visit</a></div>
+                @endif
+                @if ( isset($work->git_url) )
+                <div class="posts-btn ta-c"><a class="shadow-txt hov hov-txt " target="_blank" href="{{ e($work->git_url) }}"><i class="fa-brands fa-github"></i></a></div>
+                @endif
+            </div>
+            @endif
         </div>
     </section>
     <?php

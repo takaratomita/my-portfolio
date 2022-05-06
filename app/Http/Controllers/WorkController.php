@@ -28,8 +28,9 @@ class WorkController extends Controller
     public function showList()
     {
         $works = Work::all()->sortBy('id');
+        $titles = ['personal' => '個人で作ったもの', 'company' => '会社で作ったもの', 'friends' => '友達と作ったもの'];
 
-        return view('works.index', ['works' => $works]);
+        return view('works.index', ['works' => $works, 'titles' => $titles]);
     }
     /**
      * 実績一覧を表示する（管理画面）
@@ -39,6 +40,7 @@ class WorkController extends Controller
     public function showListAdmin()
     {
         $works = Work::all()->sortBy('id');
+
 
         return view('admin.work.list', ['works' => $works]);
     }
@@ -50,13 +52,14 @@ class WorkController extends Controller
     public function showDetail($id)
     {
         $work = Work::find($id);
+        $last_id = Work::latest('id')->get()->pluck('id')->first();
 
         if (is_null($work)) {
             \Session::flash('err_msg', 'データがありません。');
             return redirect(route('works'));
         }
 
-        return view('works.detail', ['work' => $work]);
+        return view('works.detail', ['work' => $work, 'last_id' => $last_id]);
     }
     /**
      * 実績登録画面を表示する

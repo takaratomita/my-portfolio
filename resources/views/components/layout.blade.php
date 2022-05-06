@@ -17,18 +17,27 @@
     {{-- noindex --}}
     <meta name="robots" content="noindex,nofollow">
     {{-- swiper --}}
-    {{-- <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" /> --}}
-    {{-- <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/> --}}
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
-    {{-- fontawsom --}}
-    <script src="https://kit.fontawesome.com/92c8320555.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    {{-- AOS --}}
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <link rel="stylesheet" href="/css/style.css">
+    {{-- fontawsom --}}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <script src="https://kit.fontawesome.com/92c8320555.js" crossorigin="anonymous"></script>
+
+    {{-- GoogleFont --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    @if(config('app.env') === 'production')
+    <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
+    @else
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    @endif
     <title>{{ $title }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
 </head>
 <body id="body"
 {{ isset($body_class) ? "class=${body_class}" : '' }}
@@ -44,7 +53,7 @@
     </script>
 
     @if ($admin == 'false')
-    <header id="header">
+    <header id="header" data-aos="fade-down" data-aos-duration="700" data-aos-anchor-placement="bottom-bottom">
         <div id="app">
             <gnav-component></gnav-component>
         </div>
@@ -90,9 +99,11 @@
     @endif
 
     {{-- swiper --}}
-    {{-- <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script> --}}
-    {{-- <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script> --}}
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
+    @if(config('app.env') === 'production')
+    <script src="{{ secure_asset('js/app.js') }}"></script>
+    @else
+    <script src="{{ asset('js/app.js') }}"></script>
+    @endif
 </body>
 </html>

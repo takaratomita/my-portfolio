@@ -10,7 +10,7 @@ use Mockery\Undefined;
 
 class BlogController extends Controller
 {
-        /**
+    /**
      * トップページを表示する
      *
      * @return view
@@ -26,6 +26,17 @@ class BlogController extends Controller
         ];
 
         return view('index', ['blogs' => $blogs, 'works' => $works, 'work_tags' => $work_tags]);
+    }
+    /**
+     * ログイン画面を表示する
+     *
+     * @return view
+     */
+    public function showLogin()
+    {
+
+
+        return view('admin.login');
     }
     /**
      * ブログ一覧を表示する
@@ -57,13 +68,14 @@ class BlogController extends Controller
     public function showDetail($id)
     {
         $blog = Blog::find($id);
+        $last_id = Blog::latest('id')->get()->pluck('id')->first();
 
         if (is_null($blog)) {
             \Session::flash('err_msg', 'データがありません。');
             return redirect(route('blogs'));
         }
 
-        return view('blogs.detail', ['blog' => $blog]);
+        return view('blogs.detail', ['blog' => $blog, 'last_id' => $last_id]);
     }
     /**
      * ブログ登録画面を表示する

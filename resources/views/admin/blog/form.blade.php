@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="title">
-        管理画面 | たからのポートフォリオサイト
+        管理画面 - たからのポートフォリオサイト
     </x-slot>
     <x-slot name="sub_title">
         blog
@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label for="content">
-                            アイキャッチ画像:　
+                            アイキャッチ画像:
                         </label>
                         <input type="file" name="img" value=""/>
                     </div>
